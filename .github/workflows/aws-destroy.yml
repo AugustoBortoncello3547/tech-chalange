@@ -89,3 +89,4 @@ jobs:
       - name: Terraform destroy
         working-directory: infra
         run: terraform destroy -auto-approve -var-file=env/aws.tfvars
+
