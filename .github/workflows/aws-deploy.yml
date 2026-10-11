@@ -159,3 +159,4 @@ jobs:
 
       - name: Run database migrations
         run: kubectl exec --namespace tech-challenge deploy/php -- php src/cmd/migrations/migrate.php
+
