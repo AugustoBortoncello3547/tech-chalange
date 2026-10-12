@@ -410,8 +410,12 @@ Não rode `apply -var-file=env/aws.tfvars` apontando para o MiniStack, nem o inv
 
 O item caro é o **control plane EKS** enquanto o cluster existir. Workflow **AWS destroy** (confirm = `destroy`) é o caminho do CI.
 
-Equivalente local, com backend S3 já configurado:
+Equivalente local, com backend S3 já configurado. Apague o namespace **antes**: o volume EBS do MySQL vem do PVC (EBS CSI), não do Terraform, e fica órfão (cobrando) se o cluster morrer com o PVC ainda existindo.
 
 ```bash
+kubectl delete namespace tech-challenge --wait --timeout=5m
+kubectl wait --for=delete pv --all --timeout=5m
 terraform -chdir=infra destroy -var-file=env/aws.tfvars
 ```
+
+Conferir sobras: EC2 > Volumes, estado **available**, tag `kubernetes.io/created-for/pvc/name = mysql-pvc`.
