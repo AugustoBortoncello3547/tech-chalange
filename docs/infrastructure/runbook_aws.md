@@ -297,8 +297,9 @@ cat > /tmp/gha-apply-inline.json <<EOF
       "Effect": "Allow",
       "Action": [
         "apigateway:GET", "apigateway:POST", "apigateway:PUT",
-        "apigateway:PATCH", "apigateway:DELETE", "apigateway:TagResource",
+        "apigateway:PATCH", "apigateway:DELETE",
         "elasticloadbalancing:*",
+        "ec2:GetSecurityGroupsForVpc",
         "autoscaling:AttachLoadBalancerTargetGroups",
         "autoscaling:DetachLoadBalancerTargetGroups",
         "autoscaling:DescribeAutoScalingGroups",
